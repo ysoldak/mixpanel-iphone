@@ -2,7 +2,7 @@
     "http://www.w3.org/TR/1998/REC-html40-19980424/loose.dtd">
 <html><head>
 <meta name="ROBOTS" content="NOINDEX" />
-<title>Documentation for MixpanelLib (MixpanelAPI.h)</title>
+<title>Documentation for MixpanelDelegate (MixpanelAPI.h)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 	<meta name="generator" content="HeaderDoc" />
@@ -12,8 +12,8 @@
 leftmargin="0" topmargin="0" marginwidth="0"
 marginheight="0">
 <table class="headerdoc_content_table" width="100%" cellpadding=0 cellspacing=0 border=0><tr id="colorbox" height=51 width="100%" bgcolor="#466C9B"><td width="100%">&nbsp;</td></tr><tr><td class="hd_toc_box"><table class="hd_toc_table" border="0" cellpadding="0" cellspacing="2" width="148">
-<tr><td class="toc_leadspace"></td><td colspan="2"><font size="5" color="#330066"><b>Header:</b></font></td></tr>
-<tr><td class="toc_leadspace">&nbsp;</td><td class="disclosure_triangle_td">&nbsp;</td><td class="toc_contents_text"><b><font size="+1">MixpanelLib</font></b></td></tr>
+<tr><td class="toc_leadspace"></td><td colspan="2"><font size="5" color="#330066"><b>Protocol:</b></font></td></tr>
+<tr><td class="toc_leadspace">&nbsp;</td><td class="disclosure_triangle_td">&nbsp;</td><td class="toc_contents_text"><b><font size="+1">MixpanelDelegate</font></b></td></tr>
 <tr><td></td><td colspan="2">
 <!-- headerDoc TOC style: 5 -->
 <div>
@@ -23,29 +23,26 @@ marginheight="0">
 </div>
 <div toc="section">
 <table class="hd_toc_heading_table" border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td class="toc_leadspace" ></td><td class="disclosure_triangle_td" valign="top" align="left" ><a  href="#" class="closed_disclosure_triangle" onclick="disclosure_triangle(this)">&#x25B7;</a></td><td class="disclosure_padding" ></td><td valign="top" colspan="4" class="toc_contents_text" toc="section_link" >
-<a href="index.html#HeaderDoc_constants" target=_top>Constants
-</a></td></tr>
+<a href="index.html#HeaderDoc_methods" target=_top>Methods</a></td></tr>
 </table>
 <div toc="collapsible" class="collapsible" >
-
-<ul class="tocSubEntryList"><!-- public --><li class="tocSubEntry"><a href="index.html#//apple_ref/c/data/MixpanelAPI.h/kMPUploadInterval" target="_top">kMPUploadInterval</a></li>
+<span class="hd_tocAccess">Instance Methods</span>
+<ul class="tocSubEntryList"><!-- instance method --><li class="tocSubEntry"><a href="index.html#//apple_ref/occ/intfm/MixpanelDelegate/mixpanel:didFailToUploadEvents:withError:" target="_top">mixpanel:&zwj;didFailToUploadEvents:&zwj;withError:&zwj;</a></li>
+<li class="tocSubEntry"><a href="index.html#//apple_ref/occ/intfm/MixpanelDelegate/mixpanel:didFailToUploadPeople:withError:" target="_top">mixpanel:&zwj;didFailToUploadPeople:&zwj;withError:&zwj;</a></li>
+<li class="tocSubEntry"><a href="index.html#//apple_ref/occ/intfm/MixpanelDelegate/mixpanel:didUploadEvents:" target="_top">mixpanel:didUploadEvents:</a></li>
+<li class="tocSubEntry"><a href="index.html#//apple_ref/occ/intfm/MixpanelDelegate/mixpanel:didUploadPeople:" target="_top">mixpanel:didUploadPeople:</a></li>
+<li class="tocSubEntry"><a href="index.html#//apple_ref/occ/intfm/MixpanelDelegate/mixpanel:willUploadEvents:" target="_top">mixpanel:willUploadEvents:</a></li>
+<li class="tocSubEntry"><a href="index.html#//apple_ref/occ/intfm/MixpanelDelegate/mixpanel:willUploadPeople:" target="_top">mixpanel:willUploadPeople:</a></li>
 </ul></div></div>
-<div toc="section">
-<table class="hd_toc_heading_table" border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td class="toc_leadspace" ></td><td class="disclosure_triangle_td" valign="top" align="left" ><a  href="#" class="closed_disclosure_triangle" onclick="disclosure_triangle(this)">&#x25B7;</a></td><td class="disclosure_padding" ></td><td valign="top" colspan="4" class="toc_contents_text" toc="section_link" >
-<a href="index.html#HeaderDoc_classes" target=_top>Classes</a></td></tr>
+<hr class="tocSeparator">
+<h4 class="tocSubheading">Other Reference</h4>
+<div>
+<table class="hd_toc_entry_table" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr><td class="toc_leadspace" ></td><td class="disclosure_triangle_td" ></td><td class="disclosure_padding" ></td><td valign="top" colspan="3" class="toc_contents_text"  toc="section_link"><a href="../../index.html" target="_top">Header</a></td></tr>
 </table>
-<div toc="collapsible" class="collapsible" >
-<ul class="tocSubEntryList"><!-- from class --><li class="tocSubEntry"><a href="Classes/MixpanelAPI/index.html#//apple_ref/occ/cl/MixpanelAPI" target="_top">MixpanelAPI</a></li>
-</ul></div></div>
-<div toc="section">
-<table class="hd_toc_heading_table" border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td class="toc_leadspace" ></td><td class="disclosure_triangle_td" valign="top" align="left" ><a  href="#" class="closed_disclosure_triangle" onclick="disclosure_triangle(this)">&#x25B7;</a></td><td class="disclosure_padding" ></td><td valign="top" colspan="4" class="toc_contents_text" toc="section_link" >
-<a href="index.html#HeaderDoc_protocols" target=_top>Protocols</a></td></tr>
-</table>
-<div toc="collapsible" class="collapsible" >
-<ul class="tocSubEntryList"><!-- from class --><li class="tocSubEntry"><a href="Protocols/MixpanelDelegate/index.html#//apple_ref/occ/intf/MixpanelDelegate" target="_top">MixpanelDelegate</a></li>
-</ul></div></div>
-<!-- HeaderDoc TOC framework link block begin -->
-<!-- HeaderDoc TOC framework link block end -->
+</div>
+<!-- HeaderDoc TOC framework link begin -->
+<!-- HeaderDoc TOC framework link end -->
 </td></tr>
 </table><p>&nbsp;<p>
 </td></tr></table>
