@@ -11,7 +11,42 @@
 */
 
 #import <Foundation/Foundation.h>
+@class MixpanelAPI;
+/*!
+ @protocol	MixpanelDelegate
+ @abstract	A delegate for the MixpanelAPI
+ @discussion A delegate for the MixpanelAPI
+ */
+@protocol MixpanelDelegate <NSObject>
+@optional
 
+/*!
+ @method     mixpanel:willUploadEvents   
+ @abstract   Asks the delegate if the events should be uploaded.
+ @discussion Returns YES to upload events, NO to not upload events.
+ @param mixpanel The Mixpanel API
+ @param events The events that will be uploaded.
+ */
+- (BOOL)mixpanel:(MixpanelAPI *) mixpanel willUploadEvents:(NSArray *) events;
+/*!
+ @method     mixpanel:didUploadEvents   
+ @abstract   Notifies the delegate that the events have been uploaded
+ @discussion Notifies the delegate that the events have been uploaded
+ @param mixpanel The Mixpanel API
+ @param events The events that will be uploaded.
+ */
+- (void)mixpanel:(MixpanelAPI *) mixpanel didUploadEvents:(NSArray *) events;
+
+/*!
+ @method     mixpanel:didFailToUploadEvents:withError   
+ @abstract   Notifies the delegate that there was an error while uploading events.
+ @discussion Notifies the delegate that there was an error while uploading events.
+ @param mixpanel The Mixpanel API
+ @param events The events that will be uploaded.
+ @param error the error that ocurred.
+ */
+- (void)mixpanel:(MixpanelAPI *) mixpanel didFailToUploadEvents:(NSArray *) events withError:(NSError *) error;
+@end
 /*!
     @const		kMPUploadInterval
     @abstract   The default number of seconds between data uploads to the Mixpanel server
@@ -31,6 +66,7 @@ static const NSUInteger kMPUploadInterval = 30;
 	NSArray *eventsToSend;
 	NSMutableData *responseData;
 	NSURLConnection *connection;
+    id<MixpanelDelegate> delegate;
 	#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 40000
 	UIBackgroundTaskIdentifier taskId;
 	#endif
@@ -38,6 +74,7 @@ static const NSUInteger kMPUploadInterval = 30;
 	NSUInteger uploadInterval;
 	BOOL testMode;
 	BOOL trackEvents;
+    BOOL sendDeviceModel;
 }
 /*! @property uploadInterval
 	@abstract The upload interval in seconds.
@@ -69,6 +106,25 @@ static const NSUInteger kMPUploadInterval = 30;
 */
 @property(nonatomic) BOOL trackEvents;
 
+
+/*! @property serverURL
+ @abstract The Mixpanel API endpoint 
+ @discussion Allows setting a custom API URL. Defaults to http://api.mixpanel.com/track/
+ */
+@property(retain) NSString *serverURL;
+
+
+/*! @property delegate
+ @abstract The Mixpanel API delegate 
+ @discussion Allows finer grain control over uploading events.
+ */
+@property(assign) id<MixpanelDelegate> delegate;
+
+/*! @property sendDeviceModel
+ @abstract Tells the Mixpane API to send the device model as a super property.
+ @discussion Tells the Mixpane API to send the device model as a super property.
+ */
+@property(nonatomic, assign) BOOL sendDeviceModel;
 /*!
     @method     sharedAPIWithToken:
     @abstract   Initializes the API with your API Token. Returns the shared API object.
@@ -77,7 +133,6 @@ static const NSUInteger kMPUploadInterval = 30;
 				initializations to the API.
 	@param      apiToken Your Mixpanel API token.
 */
-
 + (id)sharedAPIWithToken:(NSString*)apiToken;
 
 /*!
@@ -86,8 +141,35 @@ static const NSUInteger kMPUploadInterval = 30;
     @discussion Returns the Singleton instance of the MixpanelAPI class. 
 				The API must be initialized with <code>sharedAPIWithToken:</code> before calling this class method.
 */
-
 + (id)sharedAPI;
+
+/*!
+ @method     initWithToken:
+ @abstract   Initializes the API with your API Token. Returns the a new API object.
+ @discussion	Initializes an instance of the MixpanelAPI object with your authentication token. 
+ This must be the first message sent before logging any events since it performs important
+ initializations to the API.
+ @param      apiToken Your Mixpanel API token.
+ */
+- (id)initWithToken:(NSString*)apiToken;
+
+
+/*!
+ @method     stop
+ @abstract   Stops the background execution of the MixPanel API instance. 
+ @discussion Removes this instance as an observer to application lifecycle events and stops the background timers. 
+             Calling this method is required before disposing of this instance.
+ */
+- (void)stop;
+/*!
+ @method     start
+ @abstract   Restarts the background execution of the MixPanel API instance.
+ @discussion Adds this instance as an observer to application lifecycle events and starts the background timers.
+             This method is called automatically on initializating. You should only call it manually if you called stop previously. 
+ */
+- (void)start;
+
+
 
 /*!
  @method		registerSuperProperties:

@@ -53,7 +53,7 @@ If you want to add properties to the event you can do the following:
 This code snippet is taken from the MixpanelEventSample Project. Line 15-20 of the `MixpanelEventSampleViewController.m` file.
 
 # Super Properties #
-Super properties are an easy way to store data about your users. They are global properties that get attached to everything you are tracking. More information can be found [here](http://mixpanel.com/api/docs/guides/super-properties “super properties”).
+Super properties are an easy way to store data about your users. They are global properties that get attached to everything you are tracking. More information can be found [here](https://mixpanel.com/docs/properties-or-segments/how-do-i-set-a-property-every-time).
 
 If you want to register a super property for your current user, you can do it as follows:
 
@@ -76,12 +76,22 @@ After this call, the value of the "User Type" property will be written only if i
 This call will write out the new value for the "User Type" property if it does not exist or if its current value is "Free". As a shortcut, you can use `registerSuperPropertiesOnce:` to attach super properties to all events without overwriting their current values.
 
 # Identifying a User #
-`MixpanelAPI` uses the UDID of the current device as its default identifier. You can easily change the identifier with the following call:
+`MixpanelAPI` uses a one-way hash of the MAC address of the current device as its default identifier. You can easily change the identifier with the following call:
 
 	MixpanelAPI *mixpanel = [MixpanelAPI sharedAPI];
 	[mixpanel identifyUser:username];
 	
 Where `username` is an `NSString`. 
 
+# Using multiple MixpanelAPI instances #
+It is now possible to use multiple `MixpanelAPI` instances in a single application. This makes it easy to send events to multiple Mixpanel projects. To iniitialize a new, non singleton instance of MixpanelAPI, use the `initWithToken:` method as follows:
+
+	MixpanelAPI *mixpanel = [[MixpanelAPI alloc] initWithToken:MIXPANEL_TOKEN];
+	
+The developer is responsible for the lifecycle of this object. The recommended way of using this is to initialize all of your `MixpanelAPI` instances in `application:didFinishLaunchingWithOptions:` and deallocate them in the `dealloc` method of your Application Delegate. If you chose to dispose of this object before the end of the application's lifetime, you need to call the `stop` method. This removes the instance as an observer to the application's lifecycle events and invalidates any internal timers. Below is a code snippet that does this:
+
+	[mixpanel stop];
+	[mixpanel release];
+	
 [copy]: https://github.com/mixpanel/mixpanel-iphone/raw/master/Docs/Tutorial/images/copy.png "Copy Into Project"
 [project]: https://github.com/mixpanel/mixpanel-iphone/raw/master/Docs/Tutorial/images/project.png "Project"
